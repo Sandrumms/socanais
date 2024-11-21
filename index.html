@@ -119,7 +119,12 @@
         <ul id="channel-links"></ul>
     </div>
     <div id="player">
-        <iframe id="channel-player" src="https://reidoscanais.tv/embed/?id=globorj-globorio" allow="encrypted-media" allowfullscreen></iframe>
+        <iframe 
+    id="channel-player" 
+    src="https://reidoscanais.tv/embed/?id=globorj-globorio" 
+    allow="encrypted-media; fullscreen; autoplay" 
+    allowfullscreen>
+</iframe>
     </div>
     <script>
         const channels = {
@@ -175,7 +180,7 @@
             ],
 
 "DISCOVERY": [
-        {"name": "Discovery", "url": "https://reidoscanais.tv/embed/?id=discovery", "icon": "https://th.bing.com/th?id=OSK.afd12e15d7b7079e14d866ce1210cabc&w=102&h=102&c=7&o=6&dpr=1.7&pid=SANGAM"},
+        {"name": "Discovery", "url": "https://reidoscanais.tv/embed/?id=discoverychannel", "icon": "https://th.bing.com/th?id=OSK.afd12e15d7b7079e14d866ce1210cabc&w=102&h=102&c=7&o=6&dpr=1.7&pid=SANGAM"},
         {"name": "Discovery Kids", "url": "https://reidoscanais.tv/embed/?id=discovery Kids", "icon": "https://th.bing.com/th?id=OSK.2f89262630c4340c1f7dc78e79cb44be&w=102&h=102&c=7&o=6&dpr=1.7&pid=SANGAM"},
         {"name": "Discovery Turbo", "url": "https://reidoscanais.tv/embed/?id=discoveryturbo", "icon": "https://th.bing.com/th?id=OSK.e0c6f4aeaa5a315d4ae134355276cd50&w=102&h=102&c=7&o=6&dpr=1.7&pid=SANGAM"},
         {"name": "Discovery World", "url": "https://reidoscanais.tv/embed/?id=discoveryworld", "icon": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/World_Discovery_HD_logo.svg/375px-World_Discovery_HD_logo.svg.png"},
@@ -279,10 +284,19 @@
                     const listItem = document.createElement('li');
                     const link = document.createElement('a');
                     link.href = '#';
-                    link.addEventListener('click', event => {
-                        event.preventDefault();
-                        document.getElementById('channel-player').src = channel.url;
-                    });
+                    link.addEventListener('click', function(event) {
+    event.preventDefault(); // Evita comportamento padrão
+    const playerContainer = document.getElementById('player');
+    playerContainer.innerHTML = ''; // Remove o iframe anterior
+    const newIframe = document.createElement('iframe');
+    newIframe.src = channel.url; // Define o novo canal
+    newIframe.allow = "encrypted-media; fullscreen; autoplay";
+    newIframe.allowFullscreen = true;
+    newIframe.style.width = "100%"; // Largura total do container
+    newIframe.style.height = "100%"; // Altura total do container
+    newIframe.style.border = "none"; // Sem borda
+    playerContainer.appendChild(newIframe); // Adiciona o novo iframe ao container
+});
 
                     const icon = document.createElement('img');
                     icon.src = channel.icon;
