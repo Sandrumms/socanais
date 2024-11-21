@@ -271,41 +271,41 @@
         };
 
         const displayChannels = () => {
-            const channelLinks = document.getElementById('channel-links');
-            channelLinks.innerHTML = '';
+    const channelLinks = document.getElementById('channel-links');
+    channelLinks.innerHTML = '';
 
-            Object.keys(channels).forEach(category => {
-                const categoryList = document.createElement('ul');
-                const categoryTitle = document.createElement('h3');
-                categoryTitle.textContent = category;
-                categoryList.appendChild(categoryTitle);
+    Object.keys(channels).forEach(category => {
+        const categoryList = document.createElement('ul');
+        const categoryTitle = document.createElement('h3');
+        categoryTitle.textContent = category;
+        categoryList.appendChild(categoryTitle);
 
-                channels[category].forEach(channel => {
-                    const listItem = document.createElement('li');
-                    const link = document.createElement('a');
-                    link.href = '#';
-                    link.addEventListener('click', function(event) {
-    event.preventDefault(); // Evita comportamento padrão
+        channels[category].forEach(channel => {
+            const listItem = document.createElement('li');
+            const link = document.createElement('a');
+            link.href = '#';
+            link.onclick = function () {
     const playerContainer = document.getElementById('player');
-    playerContainer.innerHTML = ''; // Remove o iframe anterior
+    playerContainer.innerHTML = '';
     const newIframe = document.createElement('iframe');
-    newIframe.src = channel.url; // Define o novo canal
-    newIframe.allow = "encrypted-media; fullscreen; autoplay";
+    newIframe.src = channel.url;
+    newIframe.allow = "encrypted-media; fullscreen";
     newIframe.allowFullscreen = true;
-    newIframe.style.width = "100%"; // Largura total do container
-    newIframe.style.height = "100%"; // Altura total do container
-    newIframe.style.border = "none"; // Sem borda
-    playerContainer.appendChild(newIframe); // Adiciona o novo iframe ao container
-});
+    newIframe.style.width = "100%";
+    newIframe.style.height = "100%";
+    newIframe.style.border = "none";
+    playerContainer.appendChild(newIframe);
+    alert("O canal será carregado. Toque na tela caso o player não inicie.");
+};
 
-                    const icon = document.createElement('img');
-                    icon.src = channel.icon;
+            const icon = document.createElement('img');
+            icon.src = channel.icon;
 
-                    link.appendChild(icon);
-                    link.appendChild(document.createTextNode(channel.name));
-                    listItem.appendChild(link);
-                    categoryList.appendChild(listItem);
-                });
+            link.appendChild(icon);
+            link.appendChild(document.createTextNode(channel.name));
+            listItem.appendChild(link);
+            categoryList.appendChild(listItem);
+        });
 
                 channelLinks.appendChild(categoryList);
             });
