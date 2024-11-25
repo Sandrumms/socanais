@@ -3,96 +3,120 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CANAIS</title>
+    <title>Canais</title>
     <style>
+        /* Estilo global */
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Roboto', Arial, sans-serif;
             margin: 0;
             padding: 0;
             display: flex;
             flex-direction: row;
             height: 100vh;
+            background-color: #f0f2f5;
         }
+
+        /* Lista de canais */
         #channel-list {
-            background-color: #f9f9f9;
+            background-color: #ffffff;
             overflow-y: auto;
-            padding: 10px;
-            width: 300px;
+            padding: 15px;
+            width: 320px;
             flex-shrink: 0;
             display: flex;
             flex-direction: column;
-            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+            border-right: 1px solid #e5e5e5;
         }
-        #channel-list h3 {
-            margin: 15px 0 10px;
-            font-size: 18px;
-            color: #555;
-            border-bottom: 1px solid #ccc;
-            padding-bottom: 5px;
+
+        /* Título */
+        #title {
+            font-size: 22px;
+            text-align: center;
+            padding: 15px;
+            background-color: #0078d7;
+            color: white;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.15);
+            letter-spacing: 1px;
         }
-        #channel-list ul {
-            list-style: none;
-            padding: 0;
+
+        /* Widget do tempo */
+        #weather-widget {
+            margin-bottom: 20px;
+            transform: scale(0.7);
+            transform-origin: top left;
         }
-        #channel-list li {
+
+        /* Campo de busca */
+        #search-container {
+            margin: 20px 0;
+            display: flex;
+            justify-content: center;
+        }
+        #search-box {
+            width: 90%;
+            padding: 12px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
+            transition: border-color 0.3s ease;
+        }
+        #search-box:focus {
+            outline: none;
+            border-color: #0078d7;
+        }
+
+        /* Lista de canais */
+        #channel-links {
+                        padding: 0;
+            margin-top: 5px;
+        }
+        #channel-links li {
             margin-bottom: 10px;
         }
-        #channel-list a {
+        #channel-links a {
             text-decoration: none;
-            color: #333;
+            color: #444;
             font-size: 16px;
             display: flex;
             align-items: center;
-            padding: 10px;
+            padding: 12px;
             border-radius: 8px;
+            background-color: #ffffff;
+            box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
             transition: background-color 0.3s ease, transform 0.2s ease;
-            cursor: pointer;
         }
-        #channel-list a:hover {
-            background-color: #e0e0e0;
+        #channel-links a:hover {
+            background-color: #0078d7;
+            color: white;
             transform: scale(1.02);
         }
-        #channel-list img {
+        #channel-links img {
             width: 40px;
             height: 40px;
             margin-right: 10px;
             border-radius: 50%;
             border: 2px solid #ccc;
         }
+
+        /* Player */
         #player {
             flex-grow: 1;
             display: flex;
             justify-content: center;
             align-items: center;
-            background-color: #000;
+            background-color: #000000;
         }
         iframe {
             width: 100%;
             height: 100%;
             border: none;
         }
-        #title {
-            font-size: 20px;
-            text-align: center;
-            padding: 15px;
-            background-color: #444;
-            color: white;
-            margin-bottom: 10px;
-            border-radius: 8px;
-            box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
-        }
-        #search-container {
-            margin: 10px 0;
-            display: flex;
-            justify-content: center;
-        }
-        #search-box {
-            width: 90%;
-            padding: 10px;
-            font-size: 16px;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-        }
+
+        /* Responsividade */
         @media (max-width: 768px) {
             body {
                 flex-direction: column;
@@ -102,6 +126,7 @@
                 height: 35%;
                 max-height: 100%;
                 box-shadow: none;
+                border-right: none;
             }
             #player {
                 width: 100%;
@@ -111,21 +136,51 @@
     </style>
 </head>
 <body>
-    <div id="channel-list">
-        <div id="title">Streaming de Canais</div>
-        <div id="search-container">
-            <input type="text" id="search-box" placeholder="Pesquisar canais..." oninput="filterChannels()">
-        </div>
-        <ul id="channel-links"></ul>
+<div id="channel-list">
+    <!-- Widget de previsão do tempo -->
+   <div id="weather-widget" style="transform: scale(0.7); transform-origin: top left; margin: 0; padding: 0; width: 438px; height: 200px;">
+    <a class="weatherwidget-io" 
+       href="https://forecast7.com/pt/n22d76n41d89/armacao-dos-buzios/" 
+       data-label_1="Tempo em" 
+       data-label_2="Búzios" 
+       data-font="Monaco" 
+       data-theme="retro-sky">
+       Tempo em Búzios
+    </a>
+    <script>
+        !function(d,s,id){
+            var js,fjs=d.getElementsByTagName(s)[0];
+            if(!d.getElementById(id)){
+                js=d.createElement(s);
+                js.id=id;
+                js.src='https://weatherwidget.io/js/widget.min.js';
+                fjs.parentNode.insertBefore(js,fjs);
+            }
+        }(document,'script','weatherwidget-io-js');
+    </script>
+</div>
+    <!-- Campo de busca -->
+    <div id="search-container">
+        <input type="text" id="search-box" placeholder="Pesquisar canais..." oninput="filterChannels()">
     </div>
-    <div id="player">
-        <iframe 
-    id="channel-player" 
-    src="https://reidoscanais.tv/embed/?id=globorj-globorio" 
-    allow="encrypted-media; fullscreen; autoplay" 
-    allowfullscreen>
-</iframe>
-    </div>
-    <script src="js/script.js"></script>
+
+    <!-- Lista de canais -->
+    <ul id="channel-links">
+        <li><a href="#"><img src="https://via.placeholder.com/40" alt="Icon"> Canal 1</a></li>
+        <li><a href="#"><img src="https://via.placeholder.com/40" alt="Icon"> Canal 2</a></li>
+        <li><a href="#"><img src="https://via.placeholder.com/40" alt="Icon"> Canal 3</a></li>
+    </ul>
+</div>
+
+<div id="player">
+    <iframe 
+        id="channel-player" 
+        src="https://reidoscanais.tv/embed/?id=globorj-globorio" 
+        allow="encrypted-media; fullscreen; autoplay" 
+        allowfullscreen>
+    </iframe>
+</div>
+
+<script src="js/script.js"></script>
 </body>
 </html>

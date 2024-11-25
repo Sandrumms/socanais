@@ -1,7 +1,7 @@
 
         const channels = {
              "Globo": [
-                {"name": "Globo Rio", "url": "https://reidoscanais.tv/embed/?id=globorj-globorio", "icon": "https://github.com/Sandrumms/CANAIS/blob/master/static/icons/globo_rio.png?raw=true"},
+                {"name": "Globo Rio", "url": "https://reidoscanais.tv/embed/player.php?l=aHR0cHM6Ly9qYWx5bnJhYmVpLmNvbS9wbGF5ZXIvZ2xvYm9yai1nbG9ib3Jpby5odG1s", "icon": "https://github.com/Sandrumms/CANAIS/blob/master/static/icons/globo_rio.png?raw=true"},
                 {"name": "InterTV Alto Litoral", "url": "https://reidoscanais.tv/embed/?id=globorj-intertvaltolitoral", "icon": "https://github.com/Sandrumms/CANAIS/blob/master/static/icons/intertv_alto_litoral.png?raw=true"},
                 {"name": "InterTV Serra+Mar", "url": "https://reidoscanais.tv/embed/?id=globorj-intertvserramar", "icon": "https://github.com/Sandrumms/CANAIS/blob/master/static/icons/intertv_serra+mar.png?raw=true"},
                 {"name": "TV Rio Sul", "url": "https://reidoscanais.tv/embed/?id=globorj-tvriosul", "icon": "https://github.com/Sandrumms/CANAIS/blob/master/static/icons/tv_rio_sul.png?raw=true"},
